@@ -5,7 +5,8 @@ const State = {
     barWeight: 20,
     targetWeight: 0,
     mode: 'calculate', // calculate, reverse, warmup
-    reversePlates: {} // e.g. { '25': 2, '20': 0 }
+    reversePlates: {}, // e.g. { '25': 2, '20': 0 }
+    theme: localStorage.getItem('ssg_theme') || 'red'
 };
 
 // Available plates in KG (default standard powerlifting set)
@@ -41,6 +42,8 @@ function initApp() {
     if (window.initInventory) initInventory();
     if (window.initBarbells) initBarbells();
     if (window.initRPE) initRPE();
+    
+    applyTheme(State.theme);
     updateUI();
 
     // Loader Screen Logic
@@ -103,6 +106,30 @@ function setupEventListeners() {
         });
     }
 
+    // Settings Customize Theme Button
+    const btnThemeSettings = document.getElementById('btn-theme-settings');
+    if (btnThemeSettings) {
+        btnThemeSettings.addEventListener('click', () => {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(b => b.classList.remove('active'));
+            const themeView = document.getElementById('theme-view');
+            if (themeView) themeView.classList.add('active');
+            
+            const headerTitle = document.getElementById('main-header-title');
+            if (headerTitle) headerTitle.textContent = 'Customize Theme';
+        });
+    }
+
+    // Theme Picker
+    document.querySelectorAll('.theme-circle').forEach(circle => {
+        circle.addEventListener('click', (e) => {
+            const theme = e.currentTarget.dataset.theme;
+            State.theme = theme;
+            localStorage.setItem('ssg_theme', theme);
+            applyTheme(theme);
+        });
+    });
+
     // Bottom Navigation (Main App Views)
     const viewTitles = {
         'load-bar': 'Load the Bar',
@@ -154,9 +181,18 @@ function setupEventListeners() {
 
     // Target weight input
     const weightInput = document.getElementById('target-weight-input');
-    weightInput.addEventListener('input', (e) => {
-        State.targetWeight = parseFloat(e.target.value) || 0;
-        updateUI();
+    if (weightInput) {
+        weightInput.addEventListener('input', (e) => {
+            State.targetWeight = parseFloat(e.target.value) || 0;
+            updateUI();
+        });
+    }
+}
+
+function applyTheme(theme) {
+    document.documentElement.className = 'theme-' + theme;
+    document.querySelectorAll('.theme-circle').forEach(circle => {
+        circle.classList.toggle('active', circle.dataset.theme === theme);
     });
 }
 

@@ -21,6 +21,27 @@
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Themes */
+html.theme-black {
+    --bg-main: #000000;
+    --bg-panel: #111111;
+    --bg-panel-light: #222222;
+}
+
+html.theme-grey {
+    --bg-main: #1C1C1E;
+    --bg-panel: #2C2C2E;
+    --bg-panel-light: #3A3A3C;
+}
+
+html.theme-white {
+    --bg-main: #F2F2F7;
+    --bg-panel: #FFFFFF;
+    --bg-panel-light: #E5E5EA;
+    --text-main: #000000;
+    --text-muted: #666666;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -334,7 +355,7 @@ button {
     font-size: 1.2rem;
     line-height: 1;
     margin-bottom: 4px;
-    color: var(--text-main);
+    color: #FFFFFF;
 }
 .plate-control-actions {
     display: flex;
@@ -418,8 +439,32 @@ button {
 .settings-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(128,128,128,0.2);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.settings-item:hover {
+    background-color: var(--bg-panel-light);
+}
+
+.theme-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(128,128,128,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+.theme-circle:hover {
+    transform: scale(1.1);
+}
+.theme-circle.active {
+    border: 2px solid var(--accent-red);
 }
 .settings-item:last-child {
     border-bottom: none;
