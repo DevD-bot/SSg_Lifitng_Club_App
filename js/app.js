@@ -214,9 +214,16 @@ function setupEventListeners() {
                 // Update State and Calculate
                 State.unit = pr.unit.toLowerCase();
                 State.targetWeight = parseFloat(pr.weight);
-                updateUnitToggleUI();
-                document.getElementById('target-weight').value = State.targetWeight;
-                calculatePlates();
+                
+                document.querySelectorAll('.toggle-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.unit === State.unit);
+                });
+                
+                const weightInput = document.getElementById('target-weight-input');
+                if (weightInput) weightInput.value = State.targetWeight;
+                
+                updateUI();
+                if (window.calculatePlatesNeeded) window.calculatePlatesNeeded();
             });
         });
     }
@@ -299,6 +306,18 @@ function setupEventListeners() {
         weightInput.addEventListener('input', (e) => {
             State.targetWeight = parseFloat(e.target.value) || 0;
             updateUI();
+            if (window.calculatePlatesNeeded) window.calculatePlatesNeeded();
+        });
+    }
+
+    // Undo Target Weight
+    const undoTargetWeightBtn = document.getElementById('undo-target-weight');
+    if (undoTargetWeightBtn) {
+        undoTargetWeightBtn.addEventListener('click', () => {
+            State.targetWeight = 0;
+            if (weightInput) weightInput.value = '';
+            updateUI();
+            if (window.calculatePlatesNeeded) window.calculatePlatesNeeded();
         });
     }
 }
@@ -361,5 +380,11 @@ function updateUI() {
     }
     if (window.calculatePlatesNeeded && State.mode === 'calculate') {
         window.calculatePlatesNeeded();
+    }
+    
+    // Sync input unit label
+    const targetUnitLabel = document.getElementById('target-weight-unit');
+    if (targetUnitLabel) {
+        targetUnitLabel.textContent = State.unit.toUpperCase();
     }
 }
