@@ -18,16 +18,5 @@ This app is built for maximum speed and simplicity, requiring zero build steps o
 * **Vanilla JavaScript**
 * **Vanilla CSS (Custom Properties, Flexbox, Grid)**
 
-## Getting Started 🚀
-
-Since this is a static web application, there are no dependencies to install!
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/DevD-bot/SSG_Lifitng_Club_App.git
-   ```
-2. Open the folder and double-click `index.html` to run it locally in any web browser.
-3. To host it, simply deploy this repository directly to **Vercel**, **Netlify**, or **GitHub Pages**.
-
 ## Credits 👨‍💻
 Created by [Dev](https://github.com/DevD-bot)
