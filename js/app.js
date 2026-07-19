@@ -88,7 +88,7 @@ function setupEventListeners() {
             if (inventoryView) inventoryView.classList.add('active');
             
             const headerTitle = document.getElementById('main-header-title');
-            if (headerTitle) headerTitle.textContent = 'Inventory';
+            if (headerTitle) headerTitle.innerHTML = 'Inventory';
         });
     }
 
@@ -102,7 +102,7 @@ function setupEventListeners() {
             if (barbellsView) barbellsView.classList.add('active');
             
             const headerTitle = document.getElementById('main-header-title');
-            if (headerTitle) headerTitle.textContent = 'Bars';
+            if (headerTitle) headerTitle.innerHTML = 'Bars';
         });
     }
 
@@ -116,7 +116,7 @@ function setupEventListeners() {
             if (themeView) themeView.classList.add('active');
             
             const headerTitle = document.getElementById('main-header-title');
-            if (headerTitle) headerTitle.textContent = 'Customize Theme';
+            if (headerTitle) headerTitle.innerHTML = 'Customize Theme';
         });
     }
 
@@ -132,7 +132,7 @@ function setupEventListeners() {
 
     // Bottom Navigation (Main App Views)
     const viewTitles = {
-        'load-bar': 'Load the Bar',
+        'load-bar': '<i class="ph-fill ph-barbell text-red"></i> <span class="gradient-text">Load the Bar</span>',
         'prep': 'Meet Prep',
         'records': 'Personal Records',
         'calculators': 'Calculators',
@@ -152,7 +152,7 @@ function setupEventListeners() {
 
             const headerTitle = document.getElementById('main-header-title');
             if (headerTitle) {
-                headerTitle.textContent = viewTitles[viewId] || 'SSG Barbell Calc';
+                headerTitle.innerHTML = viewTitles[viewId] || 'SSG Barbell Calc';
             }
         });
     });
