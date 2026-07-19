@@ -316,7 +316,7 @@ button {
 .weight-input {
     background: none;
     border: none;
-    color: white;
+    color: var(--text-main);
     font-size: 1.1rem;
     font-weight: 600;
     width: 100%;
@@ -570,9 +570,9 @@ input:checked + .slider:before {
 }
 
 .minimal-input {
-    background-color: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: white;
+    background-color: transparent;
+    border: 1px solid rgba(128,128,128,0.3);
+    color: var(--text-main);
     border-radius: 12px;
     padding: 6px 12px;
     font-size: 1rem;
